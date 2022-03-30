@@ -14,11 +14,13 @@ try:
             host="localhost",
             user="root",
             password="",
-            database="virtual assist"
+            database="virtual assistant"
             )
     c = conn.cursor()
 except Error as e:
         print(e)
+
+
         
 def check_login(email, password):
     sql = """SELECT * FROM accounts WHERE email = %s AND password = %s"""
@@ -28,6 +30,37 @@ def check_login(email, password):
     print("check_login : ", result)
     return result
 
+#insert tep text and number into db needs validation
+def add_to_step(stepText, stepNo):
+    print(stepText)
+    print(stepNo)
+    sql = """INSERT INTO `steps`(`stepText`, `stepNo`) VALUES (%s,%s)"""
+    c.execute(sql, (stepText, stepNo))
+    result = c.fetchone()
+    conn.commit()
+    print("add to step: ", result)
+    return result
+
+def search_step(stepNo):
+    
+    print(stepNo)
+    sql = """SELECT * FROM `steps` WHERE stepNo = %s"""
+    c.execute(sql, (stepNo,))
+    result = c.fetchone()
+    conn.commit()
+    print("selected step: ", result)
+    return result
+
+
+#def add_to_step(stepText, stepNo):
+    #print(stepText)
+    #print(stepNo)
+   # sql = """INSERT INTO `steps`(`stepText`, `stepNo`) VALUES (%s,%s)"""
+   # c.execute(sql, (stepText, stepNo))
+   # result = c.fetchone()
+   # conn.commit()
+   # print("add to step: ", result)
+   # return result
 def on_move_db(uid, x, y, rr):
     sql = "INSERT INTO `features`(`uid`, `pointAt`, `pressed`, `released`, `scrolling`, `clicks`, `idleTime`) VALUES (%s, %s, %s, %s, %s, %s, %s)"
     val = (uid, str(x)+str(y), 'false', 'false', 'false', "0", str(rr))    

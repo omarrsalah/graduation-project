@@ -1,26 +1,55 @@
 from tkinter import *
 import webbrowser
 import time
+import searching as srch
+from db_setup import *
+# import multiprocessing
 
-
-
+helpers=[0,0,0,0,0,0]
 def step1():
-    l["text"] = "Change the paragraph font to Arial"
+    result = search_step(1,)
+    l["text"] = result[1]
+    #l["text"] = "Change the paragraph font to Arial"
+    if(helpers[0]==0):
+        srch.helper("Change the paragraph font to Arial")
+    helpers[0]=1
     
 def step2():
-    l["text"] = "Change the font size to 36"
+    #result = search_step(c,2)
+    result = search_step(2,)
+    l["text"] =result[1]
+    if(helpers[1]==0):
+    
+      srch.helper(result[1])
+    helpers[1]=1
 def step3():
-    l["text"] = "Set the background color of the document as RED using page color option"
+    result = search_step(3,)
+    l["text"] =result[1]
+    if(helpers[2]==0):
+        srch.helper(result[1])
+    helpers[2]=1
 def step4():
-    l["text"] = "Using WordArt ,write the following  “THANK YOU” .Use any style you wish and give it a font size of 20."
+    result = search_step(4,)
+    l["text"] =result[1]
+    if(helpers[3]==0):
+        srch.helper(result[1])
+    helpers[3]=1
 def step5():
-    l["text"] = "Create page margin: top & bottom; 1.1 inch and right & left; 1.5 inch."
+    result = search_step(5,)
+    l["text"] =result[1]
+    if(helpers[4]==0):
+        srch.helper(result[1])
+    helpers[4]=1
 def step6():
-    l["text"] = "Create landscape orientation & A4 paper size."
+    result = search_step(6,)
+    l["text"] =result[1]
+    if(helpers[5]==0):
+        srch.helper(result[1])
+    helpers[5]=1
 def submit():
     window.destroy()
-   
-    
+
+
 window = Tk()
 
 window.geometry("1000x600")
@@ -130,9 +159,9 @@ b6.place(
     width = 111,
     height = 54)
 # Create label
-l = Label(window, text = "Change the paragraph font to Arial",)
-l.config(font =("Calibri", 14))
-l.pack(pady=40)
+l = Label(window, text = "Start your experiment by browsing the steps below!",)
+l.config(font =("Arial", 15))
+l.pack(pady=60)
 
 l.place(relx = 0.5,
                    rely = 0.5,
